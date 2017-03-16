@@ -1,3 +1,5 @@
+# Use Electron React
+
 # epp
 
 <img src='assets/epp.png' width=256 />
@@ -33,12 +35,3 @@ $ npm run build      # all
 $ npm run build-osx  # osx(64)
 $ npm run build-win  # win(32, 64)
 ```
-
-
-## License
-
-MIT © react-photonkit
-
-
-
-[screenshot]: assets/screenshot.png
