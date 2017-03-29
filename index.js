@@ -12,12 +12,18 @@ require('electron-debug')();
 
 // prevent window being garbage collected
 let mainWindow;
+let settingsWindow;
+let shouldQuit = false;
 var menu = Menu.buildFromTemplate(template);
 
 function onClosed() {
 	// dereference the window
 	// for multiple windows store them in an array
+	mainWindow.close();
+	settingsWindow.close();
 	mainWindow = null;
+	settingsWindow = null;
+	app.quit();
 }
 
 function createMainWindow() {
@@ -46,7 +52,60 @@ function createMainWindow() {
 		menu = null;
 	}
 
+	settingsWindow = createSettingWindow();
+
 	return win;
+}
+
+global.terminate = function () {
+    shouldQuit = true;
+    app.quit();
+};
+
+// Someone tried to run a second instance, we should focus our window
+var shouldStartInstance = app.makeSingleInstance(function(commandLine, workingDirectory) {
+    if (mainWindow) {
+        if (!mainWindow.isVisible()) {
+            mainWindow.show();
+        }
+        if (mainWindow.isMinimized()) {
+            mainWindow.restore();
+        }
+        mainWindow.focus();
+    }
+    return true;
+});
+
+if (shouldStartInstance) {
+    app.quit();
+    return;
+}
+
+function createSettingWindow() {
+	settingsWindow = new BrowserWindow({
+        width: 600,
+        height: 480,
+        frame: false,
+        resizable: false
+    });
+    settingsWindow.loadURL('file://' + __dirname + '/settings.html');
+    settingsWindow.hide();
+    settingsWindow.webContents.openDevTools();
+    settingsWindow.on('close', function(e) {
+        if (!shouldQuit) {
+            e.preventDefault();
+			console.log("obj");
+			settingsWindow.hide();
+        }
+		// settingsWindow.hide();
+    });
+    settingsWindow.on('closed', function() {
+        settingsWindow = null;
+    });
+
+    global.settingsWindow = settingsWindow;
+
+	return settingsWindow;
 }
 
 function setOptsForDualScreen(opts) {
@@ -63,7 +122,7 @@ app.on('window-all-closed', () => {
 	app.quit();
 });
 
-app.on('activate-with-no-open-windows', () => {
+app.on('activate', () => {
 	if (!mainWindow) {
 		mainWindow = createMainWindow();
 	}

@@ -1,0 +1,32 @@
+.checkBoxGroup{
+    position: relatve;
+    flex:1;
+    margin: 20px;
+}
+
+
+.settingContainer{
+    flex-direction: column;
+}
+
+
+.success-dialog{
+    position: relative;
+    text-align: center;
+    padding: 2em;
+
+    .word-content{
+        color: #388df8 ;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px
+    }
+    .back-button{
+        width: 80px;
+        height: 30px;
+        color: #fff;
+        background: #388df8;
+        border: 1px #388df8;
+        margin: 20px auto;
+    }
+}

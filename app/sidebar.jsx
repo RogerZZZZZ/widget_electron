@@ -1,22 +1,45 @@
 import React from "react";
+import Utils from './utils/utils.js'
 import {Pane, NavGroup, NavTitle, NavGroupItem} from "react-photonkit";
 
+var utils = new Utils();
+
 class Sidebar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			settingItem: this.props.settingItem
+				? this.props.settingItem
+				: []
+		}
+	}
+
 	onSelect(index) {
-		// console.log(`sidebar clicked with ${index}`)
-		this.props.onHandlerMessage(index);
+		this.props.onHandlerMessage(this.props.settingItem[index].id);
 	}
 
 	render() {
-		return (
-			<Pane ptSize="sm" sidebar>
-				<NavGroup activeKey={1} onSelect={this.onSelect.bind(this)}>
-					<NavTitle>nav group icon &amp; text</NavTitle>
-					<NavGroupItem eventKey={1} glyph="home" text="home"/>
-					<NavGroupItem eventKey={2} glyph="download" text="download"/>
-				</NavGroup>
-			</Pane>
-		);
+		let settingSets = utils.findActiveTabs(this.props.settingItem);
+		let self = this;
+		if (settingSets.length > 0) {
+			let count = 0;
+			return (
+				<Pane ptSize="sm" sidebar>
+					<div onSelect={this.onSelect.bind(self)}>
+						<NavTitle>Navigation</NavTitle>
+						{
+							settingSets.map(function(item) {
+								return (<NavGroupItem glyph={item.icon} text={item.name} key={count} onClick={self.onSelect.bind(self, count++)}/>)
+							})
+						}
+					</div>
+				</Pane>
+			)
+		} else {
+			return (
+				<Pane ptSize="sm" sidebar></Pane>
+			)
+		}
 	}
 }
 

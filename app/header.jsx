@@ -1,19 +1,42 @@
 import React from "react";
-import { Toolbar, Actionbar, Button, ButtonGroup } from "react-photonkit";
+import {Toolbar, Actionbar, Button, ButtonGroup} from "react-photonkit";
+import event from './backend/event';
+import { EVENT } from './backend/constants';
 
 class Header extends React.Component {
-  render() {
-    return (
-      <Toolbar title="epp">
-        <Actionbar>
-          <ButtonGroup>
-            <Button glyph="home" />
-            <Button glyph="github" />
-          </ButtonGroup>
-        </Actionbar>
-      </Toolbar>
-    );
-  }
+    __openSettingWindow(){
+        event.emit(EVENT.OPEN_SETTINGS_WINDOW);
+    }
+
+    __closeWindow() {
+        event.emit(EVENT.CLOSE_WINDOW);
+    }
+
+	render() {
+        var self = this;
+		return (
+			<Toolbar title={self.props.titleName}>
+				<Actionbar>
+					<ButtonGroup>
+                        {(function(){
+                            if(!self.props.existSettingButton){
+                                return (
+                                    <Button glyph="reply" onClick={self.__closeWindow}/>
+                                )
+                            }else{
+                                return(
+                                    <div>
+                                    {/* <Button glyph="home" onClick={self.__closeWindow}/> */}
+            						<Button glyph="cog" onClick={self.__openSettingWindow}/>
+                                    </div>
+                                )
+                            }
+                        })()}
+					</ButtonGroup>
+				</Actionbar>
+			</Toolbar>
+		);
+	}
 }
 
 export default Header;
