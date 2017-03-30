@@ -3,7 +3,9 @@ import ReactDom from "react-dom";
 import Storage from 'electron-json-storage';
 import {Window, Content, PaneGroup, Pane} from "react-photonkit";
 import nw from './backend/nw.interface.js'
+import MainPaneContainer from './components/MainPaneContainer.js'
 import Calendar from './components/Calendar.js'
+import Todolist from './components/Todolist.js'
 import constants from './constants.js'
 import Utils from './utils/utils.js'
 
@@ -38,7 +40,7 @@ class MainWindow extends Component {
 			}
 		})
 		this.state = {
-			mainContent: 'Calendar',
+			mainContent: 'Todolist',
 			settingItem: settingItem
 		}
 	}
@@ -63,17 +65,16 @@ class MainWindow extends Component {
 					<PaneGroup>
 						<Sidebar onHandlerMessage={this.onHandlerMessage.bind(this)} settingItem={self.state.settingItem
 							? self.state.settingItem
-							: []}/> {(function() {
-							if (self.state.mainContent === 'Calendar') {
-								return (<Calendar/>)
-							} else {
-								return (
-									<Pane className="padded-more">
-										Hello, react-photonkit!!!
-									</Pane>
-								)
-							}
-						})()}
+							: []}/>
+						<MainPaneContainer>
+							{(function() {
+								if (self.state.mainContent === 'Calendar') {
+									return (<Calendar/>)
+								} else if(self.state.mainContent === 'Todolist'){
+									return (<Todolist/>)
+								}
+							})()}
+						</MainPaneContainer>
 					</PaneGroup>
 				</Content>
 				<Footer/>

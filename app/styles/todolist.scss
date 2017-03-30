@@ -1,0 +1,73 @@
+$todolistHeight:  40px;
+
+.todolist-pane{
+    background: #222;
+    height: 100%;
+    padding: 30px;
+
+    .input-container {
+    	position: relative;
+    	width: 100%;
+        padding: 8px 10px;
+
+    	.todolist-input {
+            margin: 0 auto;
+    		outline: none;
+    		border: 0;
+    		border-bottom: 1px dotted #666;
+    		border-radius: 0;
+    		padding: 0 0 5px;
+    		width: 100%;
+    		height: 50px;
+    		font-family: inherit;
+    		font-size: 1.5rem;
+    		font-weight: 300;
+    		color: #fff;
+    		background: transparent;
+    		-webkit-font-smoothing: antialiased;
+    	}
+    }
+
+
+    .todolist-item{
+        padding: 0 10px;
+        flex-direction: row;
+        align-items: center;
+        display: flex;
+        font-size: 18px;
+        color: #fff;
+        padding: 6px 0 6px 20px;
+        border-bottom: 1px dotted #666;
+        justify-content:space-between;
+
+        .inputBox{
+            outline: none;
+            color: #fff;
+            flex: 7;
+            background: #222;
+            border: 0;
+        }
+
+        .box-show{
+            display: block;
+        }
+
+        .box-hide{
+            display: none;
+        }
+
+        .content-container{
+            line-height: $todolistHeight;
+            flex: 7;
+        }
+
+        .left-button{
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .right-button{
+            flex: 1;
+        }
+    }
+}
