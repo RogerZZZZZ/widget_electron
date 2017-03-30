@@ -52,6 +52,8 @@ function createMainWindow() {
 		menu = null;
 	}
 
+	global.mainWindow = win;
+
 	settingsWindow = createSettingWindow();
 
 	return win;

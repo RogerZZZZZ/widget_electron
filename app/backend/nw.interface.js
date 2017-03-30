@@ -15,6 +15,7 @@ import { APP_NAME, EVENT } from './constants';
 
 const terminate = remote.getGlobal('terminate');
 const settingsWindow = remote.getGlobal('settingsWindow');
+const mainWindow = remote.getGlobal('mainWindow');
 
 const window = () => {
     return remote.getCurrentWindow();
@@ -70,6 +71,12 @@ event.on(EVENT.OPEN_SETTINGS_WINDOW, () => {
 
 event.on(EVENT.OPEN_EXTERNAL_URL, (url) => {
     shell.openExternal(url);
+});
+
+
+event.on(EVENT.SUCEESS_SETTING, () => {
+    mainWindow.focus();
+    mainWindow.reload();
 });
 
 window().on('maximize', event.emit.bind(null, EVENT.WINDOW_MAXIMIZED));

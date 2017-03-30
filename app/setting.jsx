@@ -7,6 +7,8 @@ import constants from './constants.js'
 import Storage from 'electron-json-storage';
 import Dialog from 'boron/ScaleModal';
 import Utils from './utils/utils.js'
+import event from './backend/event.js'
+import { EVENT } from './backend/constants.js'
 
 import Header from "./header.jsx"
 import Footer from "./footer.jsx";
@@ -36,6 +38,8 @@ class SettingWindow extends Component {
 
     hideModal(){
         this.refs.modal.hide();
+        event.emit(EVENT.SUCEESS_SETTING);
+        event.emit(EVENT.CLOSE_WINDOW);
     }
 
     setSetting(val) {
@@ -46,7 +50,6 @@ class SettingWindow extends Component {
         e.target.checked = (e.target.checked === true ? true: false);
         let clickItemName = e.target.name;
         this.state.settingItem[clickItemName].state = e.target.checked;
-        this.refs.modal.show();
     }
 
     submitSetting(){
@@ -73,7 +76,7 @@ class SettingWindow extends Component {
                         <Button text="OK" ptStyle="primary" type="submit" onClick={self.submitSetting.bind(self)}/>
                         </CheckBoxGroup>
                         <Dialog ref="modal" modalStyle={modalStyle} className="success-dialog">
-                            <div className="word-content">Success</div>
+                            <div className="word-content">Setting Successfully</div>
                             <button onClick={this.hideModal.bind(self)} className="back-button">Close</button>
                         </Dialog>
 					</PaneGroup>

@@ -26,7 +26,6 @@ class Header extends React.Component {
                             }else{
                                 return(
                                     <div>
-                                    {/* <Button glyph="home" onClick={self.__closeWindow}/> */}
             						<Button glyph="cog" onClick={self.__openSettingWindow}/>
                                     </div>
                                 )

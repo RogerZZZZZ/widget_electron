@@ -28,6 +28,7 @@ export const EVENT = keymirror({
     MAXIMIZE_WINDOW: null,
     OPEN_EXTERNAL_URL: null,
     OPEN_SETTINGS_WINDOW: null,
+    SUCEESS_SETTING: null,
 
     WINDOW_MAXIMIZED: null,
     WINDOW_UNMAXIMIZED: null,
