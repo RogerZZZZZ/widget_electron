@@ -46,6 +46,16 @@ class Utils{
         return res;
     }
 
+    timeCalculator(startTime, endTime, type){
+        if(type === 'day'){
+            return (endTime - startTime)/(3600000*24);
+        }
+    }
+
+    judgeValidTime(startTime, endTime){
+        return endTime-startTime < 0 ? false: true;
+    }
+
 }
 
 export default Utils;
