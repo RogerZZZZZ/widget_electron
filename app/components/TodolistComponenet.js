@@ -17,7 +17,7 @@ class Input extends Component{
     render(){
         return(
             <div className="input-container">
-                <input type="text" placeholder="What needs to be done?" className="todolist-input"/>
+                <input type="text" placeholder={this.props.placeholder} className={this.props.styleClass} onFocus={this.props.onFocus} onBlur={this.props.onBlur} onKeyUp={this.props.onKeyUp}/>
             </div>
         )
     }
@@ -63,7 +63,7 @@ class TodolistItem extends Component{
 
     __renderTitleInput(data){
         return(
-            <input  autoComplete="off" autoFocus defaultValue={data.title} maxLength="64" ref="inputBox" className="inputBox" onKeyUp={this.__inputSubmit.bind(this)} onBlur={this.__saveTitle.bind(this)} type="text"/>
+            <input  autoComplete="off" autoFocus defaultValue={data.title} maxLength="64" ref="inputBox" className="inputBox" onKeyUp={this.__inputSubmit.bind(this)}  type="text"/>
         )
     }
 
@@ -173,7 +173,7 @@ class TodolistPane extends Component{
 class DatePickerComponent extends Component{
 	render() {
 		return (
-			<button className="date-picker-input" onClick={this.props.onClick}>
+			<button className={this.props.type === 'big'? "date-picker-big-input" :"date-picker-input"} onClick={this.props.onClick}>
 				{this.props.value}
 			</button>
 		)
@@ -184,5 +184,6 @@ class DatePickerComponent extends Component{
 module.exports = {
     Input: Input,
     TodolistItem: TodolistItem,
-    TodolistPane: TodolistPane
+    TodolistPane: TodolistPane,
+    DatePickerComponent: DatePickerComponent
 }

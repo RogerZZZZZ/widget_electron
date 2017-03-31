@@ -28,6 +28,27 @@ $todolistHeight:  40px;
     	}
     }
 
+    .new-date-picker-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 6px;
+
+
+        .date-picker-item{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .date-picker-desc{
+                color: #fff;
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
     .todolist-item{
         display: flex;
         flex-direction: column;

@@ -48,12 +48,12 @@ class Utils{
 
     timeCalculator(startTime, endTime, type){
         if(type === 'day'){
-            return (endTime - startTime)/(3600000*24);
+            return Math.round((endTime - startTime)/(3600000*24));
         }
     }
 
     judgeValidTime(startTime, endTime){
-        return endTime-startTime < 0 ? false: true;
+        return endTime-startTime > 0 ? true: endTime.isSame(startTime, 'day') ? true: false;
     }
 
 }
