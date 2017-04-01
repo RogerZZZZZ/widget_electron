@@ -48,13 +48,32 @@ class Utils{
 
     timeCalculator(startTime, endTime, type){
         if(type === 'day'){
-            return Math.round((endTime - startTime)/(3600000*24));
+            return endTime.diff(startTime, 'days')
         }
     }
 
     judgeValidTime(startTime, endTime){
-        return endTime-startTime > 0 ? true: endTime.isSame(startTime, 'day') ? true: false;
+        return startTime.isBefore(endTime) ? true: (endTime.isSame(startTime, 'day') ? true: false);
     }
+
+    /**
+     * find the element in arr by id.
+     */
+    modifyElementInArr(arr, element){
+        let newId = element.id;
+        for(let item in arr){
+            if(arr[item].id === newId){
+                arr[item] = element;
+                break;
+            }
+        }
+        return arr;
+    }
+
+    deleteElementInArr(){
+
+    }
+
 
 }
 

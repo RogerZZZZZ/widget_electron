@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import Button from "./Button.js"
 import DatePicker from "react-datepicker"
+import Storage from 'electron-json-storage';
 import moment from 'moment'
 import testData from './textData.js'
 import Utils from '../utils/utils.js'
@@ -43,8 +44,10 @@ class TodolistItem extends Component{
 
     __inputSubmit(event){
         if(event.keyCode == "13"){
-            event.target.blur();
+            this.state.data.title = event.target.value;
+            this.setState({data: this.state.data})
             this.__saveTitle()
+            event.target.blur();
         }else if(event.keyCode == '27'){
             this.__changeInputStatus();
         }
@@ -57,6 +60,15 @@ class TodolistItem extends Component{
     }
 
     __saveTitle(){
+        let self = this;
+        Storage.get('todolist', function(err, data) {
+            if(err) throw err;
+
+            let newData = utils.modifyElementInArr(data, self.state.data);
+            console.log(newData);
+            Storage.set('todolist', newData, ()=> {})
+        })
+
         this.__changeInputStatus();
     }
 
@@ -69,7 +81,7 @@ class TodolistItem extends Component{
 
 
     __handleStartTime(date) {
-        if(utils.judgeValidTime(date, this.state.data.end)){
+        if(utils.judgeValidTime(moment(date), moment(this.state.data.end))){
             this.state.data.start = date;
             this.setState({
                 data: this.state.data
@@ -82,7 +94,7 @@ class TodolistItem extends Component{
     }
 
     __handleEndTime(date){
-        if(utils.judgeValidTime(this.state.data.start, date)){
+        if(utils.judgeValidTime(moment(this.state.data.start), moment(date))){
             this.state.data.end = date;
             this.setState({
                 data: this.state.data
@@ -136,7 +148,7 @@ class TodolistItem extends Component{
                             </div>
                             <div className="todolist-data-select-pane">
                                 <div className="select-pane-content">Duration:</div>
-                                <div className="select-pane-content">{utils.timeCalculator(data.start, data.end, 'day')} days</div>
+                                <div className="select-pane-content">{utils.timeCalculator(moment(data.start), moment(data.end), 'day')} days</div>
                             </div>
                         </div>
                     )
@@ -151,7 +163,7 @@ class TodolistPane extends Component{
     constructor(props){
         super(props)
         this.state = {
-            data: testData
+            data: this.props.todolist
         }
     }
 
@@ -161,7 +173,7 @@ class TodolistPane extends Component{
         return (
             <div>
                 {
-                    self.state.data.map(function(item){
+                    self.props.todolist.map(function(item){
                         return (<TodolistItem data={item} key={keyCount++}/>)
                     })
                 }
