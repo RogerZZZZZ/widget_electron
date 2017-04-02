@@ -70,11 +70,25 @@ class Utils{
         return arr;
     }
 
-    deleteElementInArr(){
-
+    deleteElementInArr(arr, itemId){
+        for(let item in arr){
+            if(arr[item].id === itemId){
+                arr.splice(parseInt(item), 1);
+                break;
+            }
+        }
+        return arr;
     }
 
-
+    elementFilter(arr, targetAttr, filterVal){
+        let res = [];
+        for(let item in arr){
+            if(arr[item][targetAttr] !== filterVal){
+                res.push(arr[item]);
+            }
+        }
+        return res;
+    }
 }
 
 export default Utils;

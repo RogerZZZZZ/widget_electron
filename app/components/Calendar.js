@@ -4,7 +4,10 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment'
 import Storage from 'electron-json-storage';
 import cn from 'classnames'
+import Utils from '../utils/utils.js'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+let utils = new Utils();
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -26,7 +29,7 @@ class Calendar extends Component {
                 Storage.get('todolist', function(err, data) {
                     if(err) throw err;
 
-                    event = data;
+                    event = utils.elementFilter(data, 'status', 'done');
                     self.setEvent(event);
                 })
             }

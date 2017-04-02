@@ -59,17 +59,17 @@ class TodolistItem extends Component{
         )
     }
 
-    __saveTitle(){
+    __saveTitle(type){
         let self = this;
         Storage.get('todolist', function(err, data) {
             if(err) throw err;
 
             let newData = utils.modifyElementInArr(data, self.state.data);
-            console.log(newData);
             Storage.set('todolist', newData, ()=> {})
         })
-
-        this.__changeInputStatus();
+        if(type !== false){
+            this.__changeInputStatus();
+        }
     }
 
 
@@ -112,44 +112,72 @@ class TodolistItem extends Component{
     	})
     }
 
+    __checkButtonClick(){
+        this.state.data.status = 'done'
+        this.__saveTitle(false);
+        this.setState({
+            data: this.state.data
+        })
+    }
+
+    __deleteButtonClick(itemId){
+        let self = this;
+        Storage.get('todolist', function(err, data) {
+            if(err) throw err;
+
+            let newData = utils.deleteElementInArr(data, itemId);
+            Storage.set('todolist', newData, () => {
+                self.setState({
+                    data: null
+                })
+            })
+        })
+    }
+
     render(){
         let self = this;
         let data = this.state.data;
         return(
-            <div className="todolist-item">
-                <div className="todolist-item-main">
-                    {
-                        self.state.editStatus ? null: (
-                            <Button name="check" buttonClick={()=>console.log("click")} className="left-button" align="left"/>
-                        )
-                    }
-                    {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data)}
-                    {
-                        self.state.editStatus ? null: (
-                            <Button name="edit" buttonClick={self.__changeInputStatus.bind(this)} align="right" />
-                        )
-                    }
-                    <Button name="trash" buttonClick={()=>console.log("obj")} align="right"/>
-                </div>
+            <div>
                 {
-                    !self.state.editStatus ? null: (
-                        <div className="todolist-item-additional">
-                            <div className="todolist-data-select-pane">
-                                <div className="select-pane-content">Start Time:</div>
-                                <div className="select-pane-date">
-                                    <DatePicker customInput={<DatePickerComponent />} selected={moment(data.start)} onChange={this.__handleStartTime.bind(self)} />
-                                </div>
+                    (data === null || data.status === 'done' )? null : (
+                        <div className="todolist-item">
+                            <div className="todolist-item-main">
+                                {
+                                    self.state.editStatus ? null: (
+                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left"/>
+                                    )
+                                }
+                                {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data)}
+                                {
+                                    self.state.editStatus ? null: (
+                                        <Button name="edit" buttonClick={self.__changeInputStatus.bind(this)} align="right" />
+                                    )
+                                }
+                                <Button name="trash" buttonClick={self.__deleteButtonClick.bind(self, data.id)} align="right"/>
                             </div>
-                            <div className="todolist-data-select-pane">
-                                <div className="select-pane-content">End Time:</div>
-                                <div className="select-pane-date">
-                                    <DatePicker customInput={<DatePickerComponent />} selected={moment(data.end)} onChange={this.__handleEndTime.bind(self)} />
-                                </div>
-                            </div>
-                            <div className="todolist-data-select-pane">
-                                <div className="select-pane-content">Duration:</div>
-                                <div className="select-pane-content">{utils.timeCalculator(moment(data.start), moment(data.end), 'day')} days</div>
-                            </div>
+                            {
+                                !self.state.editStatus ? null: (
+                                    <div className="todolist-item-additional">
+                                        <div className="todolist-data-select-pane">
+                                            <div className="select-pane-content">Start Time:</div>
+                                            <div className="select-pane-date">
+                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.start)} onChange={this.__handleStartTime.bind(self)} />
+                                            </div>
+                                        </div>
+                                        <div className="todolist-data-select-pane">
+                                            <div className="select-pane-content">End Time:</div>
+                                            <div className="select-pane-date">
+                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.end)} onChange={this.__handleEndTime.bind(self)} />
+                                            </div>
+                                        </div>
+                                        <div className="todolist-data-select-pane">
+                                            <div className="select-pane-content">Duration:</div>
+                                            <div className="select-pane-content">{utils.timeCalculator(moment(data.start), moment(data.end), 'day')} days</div>
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     )
                 }

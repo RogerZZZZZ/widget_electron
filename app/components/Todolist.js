@@ -26,7 +26,6 @@ class Todolist extends Component{
             }else{
                 Storage.get('todolist', function(err, data){
                     if(err) throw err;
-                    console.log(data);
                     todolist = data;
                     self.setTodolist(data);
                 })
