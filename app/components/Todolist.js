@@ -33,7 +33,7 @@ class Todolist extends Component{
         })
 
         this.state = {
-            isOpen: true,
+            isOpen: false,
             todolist: todolist,
             startTime: moment(),
             endTime: moment().add(1, "days")

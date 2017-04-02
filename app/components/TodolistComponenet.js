@@ -53,9 +53,11 @@ class TodolistItem extends Component{
         }
     }
 
-    __renderTitle(data){
+    __renderTitle(data, status){
         return(
-            <div className={"content-container"}>{data.title}</div>
+            <div className={"content-container " + (status === 'done' ? 'content-container--complete': '')}>
+                <div className="text-container">{data.title}</div>
+            </div>
         )
     }
 
@@ -140,17 +142,20 @@ class TodolistItem extends Component{
         return(
             <div>
                 {
-                    (data === null || data.status === 'done' )? null : (
+                    data === null? null : (
                         <div className="todolist-item">
                             <div className="todolist-item-main">
                                 {
-                                    self.state.editStatus ? null: (
-                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left"/>
+                                    self.state.editStatus ? null: ( data.status === 'done' ? (
+                                        <Button name="check-done" static={true} className="left-button" align="left"/>
                                     )
+                                    :(
+                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left"/>
+                                    ))
                                 }
-                                {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data)}
+                                {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data, data.status)}
                                 {
-                                    self.state.editStatus ? null: (
+                                    self.state.editStatus || data.status === 'done' ? null: (
                                         <Button name="edit" buttonClick={self.__changeInputStatus.bind(this)} align="right" />
                                     )
                                 }

@@ -22,7 +22,7 @@ $todolistHeight:  40px;
     		font-family: inherit;
     		font-size: 1.5rem;
     		font-weight: 300;
-    		color: #fff;
+    		color: #999;
     		background: transparent;
     		-webkit-font-smoothing: antialiased;
     	}
@@ -42,7 +42,7 @@ $todolistHeight:  40px;
             align-items: center;
 
             .date-picker-desc{
-                color: #fff;
+                color: #999;
                 font-size: 18px;
                 margin-bottom: 8px;
             }
@@ -59,14 +59,14 @@ $todolistHeight:  40px;
             align-items: center;
             display: flex;
             font-size: 18px;
-            color: #fff;
+            color: #999;
             padding: 6px 0 6px 20px;
             border-bottom: 1px dotted #666;
             justify-content:space-between;
 
             .inputBox{
                 outline: none;
-                color: #fff;
+                color: #999;
                 flex: 7;
                 background: #222;
                 border: 0;
@@ -83,6 +83,31 @@ $todolistHeight:  40px;
             .content-container{
                 line-height: $todolistHeight;
                 flex: 7;
+
+                .text-container{
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .text-container:after{
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    border-top: 2px solid #85bf6b;
+                    width: 0;
+                    height: 46%;
+                    content: '';
+                }
+            }
+
+            .content-container--complete{
+                .text-container{
+                    color: #666;
+                }
+
+                .text-container:after{
+                    width:100%;
+                }
             }
 
             .left-button{
@@ -95,7 +120,6 @@ $todolistHeight:  40px;
                 margin-right: 10px;
             }
         }
-
 
         .todolist-item-additional{
             display: flex;
@@ -114,7 +138,7 @@ $todolistHeight:  40px;
                     font-size: 15px;
                     text-align: center;
                     flex: 1;
-                    color: #fff;
+                    color: #999;
                 }
 
                 .select-pane-date{
