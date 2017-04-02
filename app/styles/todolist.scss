@@ -83,6 +83,7 @@ $todolistHeight:  40px;
             .content-container{
                 line-height: $todolistHeight;
                 flex: 7;
+                position: relative;
 
                 .text-container{
                     position: relative;
@@ -97,6 +98,13 @@ $todolistHeight:  40px;
                     width: 0;
                     height: 46%;
                     content: '';
+                }
+
+                .date-left{
+                    position: relative;
+                    float: right;
+                    right: 0;
+                    margin-right: 10px;
                 }
             }
 

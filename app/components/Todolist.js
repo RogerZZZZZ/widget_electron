@@ -22,7 +22,6 @@ class Todolist extends Component{
             if(!hasKey) {
                 Storage.set('todolist', [], self.setTodolist([]));
                 todolist = [];
-                console.log("obj1");
             }else{
                 Storage.get('todolist', function(err, data){
                     if(err) throw err;

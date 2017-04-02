@@ -54,9 +54,15 @@ class TodolistItem extends Component{
     }
 
     __renderTitle(data, status){
+        let self = this;
         return(
             <div className={"content-container " + (status === 'done' ? 'content-container--complete': '')}>
                 <div className="text-container">{data.title}</div>
+                {
+                    status === 'done' ? null : (
+                        <div className="date-left">{utils.timeCalculator(moment(self.state.data.start), moment(self.state.data.end), 'day')} days left</div>
+                    )
+                }
             </div>
         )
     }
@@ -115,7 +121,8 @@ class TodolistItem extends Component{
     }
 
     __checkButtonClick(){
-        this.state.data.status = 'done'
+        this.state.data.status = (this.state.data.status === 'done' ? 'wait': 'done')
+
         this.__saveTitle(false);
         this.setState({
             data: this.state.data
@@ -146,12 +153,12 @@ class TodolistItem extends Component{
                         <div className="todolist-item">
                             <div className="todolist-item-main">
                                 {
-                                    self.state.editStatus ? null: ( data.status === 'done' ? (
-                                        <Button name="check-done" static={true} className="left-button" align="left"/>
+                                    !self.state.editStatus ? ( data.status === 'done' ? (
+                                        <Button name="check" static={true} buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left" status={true}/>
                                     )
                                     :(
-                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left"/>
-                                    ))
+                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left" status={false}/>
+                                    )):null
                                 }
                                 {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data, data.status)}
                                 {
