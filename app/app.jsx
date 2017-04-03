@@ -6,6 +6,7 @@ import nw from './backend/nw.interface.js'
 import MainPaneContainer from './components/MainPaneContainer.js'
 import Calendar from './components/Calendar.js'
 import Todolist from './components/Todolist.js'
+import Basketball from './components/Basketball.js'
 import constants from './constants.js'
 import Utils from './utils/utils.js'
 
@@ -40,7 +41,7 @@ class MainWindow extends Component {
 			}
 		})
 		this.state = {
-			mainContent: 'Todolist',
+			mainContent: 'Basketball',
 			settingItem: settingItem
 		}
 	}
@@ -68,11 +69,14 @@ class MainWindow extends Component {
 							: []}/>
 						<MainPaneContainer>
 							{(function() {
-								if (self.state.mainContent === 'Calendar') {
+                                let mainContentStatus = self.state.mainContent;
+								if (mainContentStatus === 'Calendar') {
 									return (<Calendar/>)
-								} else if(self.state.mainContent === 'Todolist'){
+								} else if(mainContentStatus === 'Todolist'){
 									return (<Todolist/>)
-								}
+								} else if(mainContentStatus === 'Basketball'){
+                                    return (<Basketball />)
+                                }
 							})()}
 						</MainPaneContainer>
 					</PaneGroup>

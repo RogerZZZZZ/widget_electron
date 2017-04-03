@@ -4,6 +4,7 @@ import event from './backend/event';
 import { EVENT } from './backend/constants';
 
 class Header extends React.Component {
+    
     __openSettingWindow(){
         event.emit(EVENT.OPEN_SETTINGS_WINDOW);
     }
