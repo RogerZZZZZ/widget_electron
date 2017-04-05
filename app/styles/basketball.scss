@@ -18,6 +18,16 @@
         width: 1100px;
     }
 
+    .basketball-table-small{
+        width: 300px;
+    }
+
+    .statistics-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     .table{
         display: flex;
         flex-direction: column;

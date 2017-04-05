@@ -28,6 +28,11 @@ class BasketballCrawler {
 	    })
 	}
 
+	splitString(str){
+		let tmp = str.split('.')[1].split(',');
+		return {name: tmp[0], team: tmp[1]}
+	}
+
 	teamRankingCallback(html){
 		let $ = cheerio.load(html);
 		let wrap = $('.responsive-table-wrap .standings');
@@ -79,7 +84,47 @@ class BasketballCrawler {
 	}
 
 	playerStatisticsCallback(html){
+		let self = this;
+		let $ = cheerio.load(html);
+		let wrap = $('.mod-content .tablehead');
+		let pts = [], reb = [], ass = [], blk = [], fg = [], stl = [];
+		wrap.each((item) => {
+			if(item < 6){
+				let tr = $(wrap[item]).find('tr');
+				tr.each((trItem) => {
+					let player = {};
+					let tmpTd = $(tr[trItem]).find('td');
+					let content, value;
+					if(trItem >= 2 && trItem < 6){
+						content = self.splitString($(tmpTd[0]).text());
+						value = $(tmpTd[1]).text();
+					}else if(trItem === 1){
+						content = self.splitString($(tmpTd[1]).text());
+						value = $(tmpTd[2]).text();
+					}
 
+					if(trItem >=1 && trItem < 6){
+						player.name = content.name;
+						player.team = content.team;
+						player.value = value;
+						if(item === 0){
+							pts.push(player);
+						}else if(item === 1){
+							ass.push(player);
+						}else if(item === 2){
+							fg.push(player);
+						}else if(item === 3){
+							reb.push(player);
+						}else if(item === 4){
+							blk.push(player);
+						}else if(item === 5){
+							stl.push(player);
+						}
+					}
+				})
+			}
+		})
+		return {pts:pts, reb:reb, ass:ass, blk:blk, fg:fg, stl:stl};
 	}
 
 	gameResultCallback(html) {

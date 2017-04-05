@@ -17,11 +17,17 @@ class Table extends Component{
         let count = 0;
         let today = moment();
         let date = this.state.type === 1 ? today.add(1, 'days').format('dddd, MMMM Do YYYY') : today.format('dddd, MMMM Do YYYY');
+        let header = this.props.header ? this.props.header: '';
         return(
-            <div className={self.props.type === 2? "table basketball-table-medium" : "table basketball-table-big"}>
+            <div className={self.props.type === 2? "table basketball-table-medium" : self.props.type === 3 ? "table basketball-table-small" :"table basketball-table-big"}>
                 {
-                    self.props.type !== 2? (
+                    self.props.type !== 2 && self.props.type !== 3? (
                         <div className="date-container">{date}</div>
+                    ):null
+                }
+                {
+                    self.props.type === 3? (
+                        <div className="date-container">{header}</div>
                     ):null
                 }
                 <TableHeader type={self.props.type} />
@@ -58,12 +64,12 @@ class TableHeader extends Component{
                             <div className="cell-item medium-cell">LOSER HIGH</div>
                         </div>
                     )
-                    :self.props.type === 1?(
+                    :self.props.type === 1? (
                         <div className="table-head table-item-container">
                             <div className="cell-item big-cell">MATCHUP</div>
                         </div>
                     )
-                    :(
+                    :self.props.type === 2? (
                         <div className="table-head table-item-container">
                             <div className="cell-item big-cell">MATCHUP</div>
                             <div className="cell-item small-cell">W</div>
@@ -78,7 +84,13 @@ class TableHeader extends Component{
                             <div className="cell-item small-cell">L10</div>
                         </div>
                     )
-
+                    :(
+                        <div className="table-head table-item-container">
+                            <div className="cell-item small-cell">Rank</div>
+                            <div className="cell-item big-cell">Player Name</div>
+                            <div className="cell-item small-cell">Value</div>
+                        </div>
+                    )
                 }
             </div>
         )
@@ -97,7 +109,6 @@ class TableCell extends Component{
     render(){
         let self = this;
         let itemData = self.props.item;
-        console.log(self.props.key);
         return (
             <div>
             {
@@ -146,7 +157,7 @@ class TableCell extends Component{
                         </div>
                     </div>
                 )
-                : (
+                : self.props.type === 2 ? (
                     <div className={self.props.index !== 9? "table-cell table-item-container": "table-cell table-item-container playoff-line"}>
                         <div className="cell-item big-cell ">
                             <div className="cell">
@@ -187,11 +198,38 @@ class TableCell extends Component{
                         </div>
                     </div>
                 )
+                :(
+                    <div className="table-cell table-item-container">
+                        <div className="cell-item small-cell ">
+                            <span>{self.props.index}</span>
+                        </div>
+                        <div className="cell-item big-cell ">
+                            <span>{itemData.name}</span>
+                        </div>
+                        <div className="cell-item small-cell ">
+                            <span>{itemData.value}</span>
+                        </div>
+                    </div>
+                )
             }
             </div>
         )
     }
 }
+
+// class SmallTable extends Component{
+//     constructor(props){
+//         super(props)
+//
+//     }
+//
+//
+//     render(){
+//
+//     }
+// }
+//
+// class
 
 
 class ButtonGroup extends Component{

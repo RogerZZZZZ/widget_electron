@@ -15,14 +15,14 @@ class Basketball extends Component{
         bCrawler.init('teamRanking', (data) => {
             self.setState({teamRanking: data})
         });
-        // bCrawler.init('playerStatistics', (data) => {
-        //     self.setState({playerStatistics: data})
-        // });
+        bCrawler.init('playerStatistics', (data) => {
+            self.setState({playerStatistics: data})
+        });
         this.state = {
             gameResult: [],
             teamRanking: [],
             playerStatistics: [],
-            pageIndex: 1 //0:Schedule, 1:Ranking, 2: Player Statistics
+            pageIndex: 2 //0:Schedule, 1:Ranking, 2: Player Statistics
         }
     }
 
@@ -42,6 +42,16 @@ class Basketball extends Component{
         let teamRanking = this.state.teamRanking;
         let eastRanking = (teamRanking.length === 0 ? []: teamRanking.east),
             westRanking = (teamRanking.length === 0 ? []: teamRanking.west);
+        let ps = this.state.playerStatistics;
+        let pts = [], blk = [], stl =[], fg = [], reb = [], ass = [];
+        if(ps.length !== 0){
+            pts = ps.pts;
+            blk = ps.blk;
+            stl = ps.stl;
+            fg = ps.fg;
+            reb = ps.reb;
+            ass = ps.ass;
+        }
         return (
             <div>
                 <ButtonGroup>
@@ -120,7 +130,17 @@ class Basketball extends Component{
                         </div>
                     ):
                     (
-                        <div></div>
+                        <div className="main-wrap">
+                            <div className="title">Player Statistics</div>
+                            <div className="statistics-container">
+                                <Table data={pts} type={3} header="POINTS"/>
+                                <Table data={blk} type={3} header="BLOCKS"/>
+                                <Table data={ass} type={3} header="ASSISTS"/>
+                                <Table data={reb} type={3} header="REBOUNDS"/>
+                                <Table data={stl} type={3} header="STEALS"/>
+                                <Table data={fg} type={3} header="FIELD GOAL %"/>
+                            </div>
+                        </div>
                     ))
                 }
 
