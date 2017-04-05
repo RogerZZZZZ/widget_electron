@@ -19,12 +19,16 @@ class Table extends Component{
         let date = this.state.type === 1 ? today.add(1, 'days').format('dddd, MMMM Do YYYY') : today.format('dddd, MMMM Do YYYY');
         return(
             <div className={self.props.type === 2? "table basketball-table-medium" : "table basketball-table-big"}>
-                <div className="date-container">{date}</div>
+                {
+                    self.props.type !== 2? (
+                        <div className="date-container">{date}</div>
+                    ):null
+                }
                 <TableHeader type={self.props.type} />
                 {
                     self.props.data.map((item) => {
                         return (
-                            <TableCell item={item} type={self.props.type} key={count++}/>
+                            <TableCell item={item} type={self.props.type} key={count++} index={count}/>
                         )
                     })
                 }
@@ -70,6 +74,8 @@ class TableHeader extends Component{
                             <div className="cell-item small-cell">ROAD</div>
                             <div className="cell-item small-cell">PPG</div>
                             <div className="cell-item small-cell">OPP PPG</div>
+                            <div className="cell-item small-cell">STRK</div>
+                            <div className="cell-item small-cell">L10</div>
                         </div>
                     )
 
@@ -91,6 +97,7 @@ class TableCell extends Component{
     render(){
         let self = this;
         let itemData = self.props.item;
+        console.log(self.props.key);
         return (
             <div>
             {
@@ -140,7 +147,7 @@ class TableCell extends Component{
                     </div>
                 )
                 : (
-                    <div className="table-cell table-item-container">
+                    <div className={self.props.index !== 9? "table-cell table-item-container": "table-cell table-item-container playoff-line"}>
                         <div className="cell-item big-cell ">
                             <div className="cell">
                                 <span className="number">{itemData.number}</span>
@@ -171,6 +178,12 @@ class TableCell extends Component{
                         </div>
                         <div className="cell-item small-cell ">
                             <span>{itemData.oppg}</span>
+                        </div>
+                        <div className="cell-item small-cell ">
+                            <span>{itemData.strk}</span>
+                        </div>
+                        <div className="cell-item small-cell ">
+                            <span>{itemData.lten}</span>
                         </div>
                     </div>
                 )

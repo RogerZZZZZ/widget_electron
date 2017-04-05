@@ -2,6 +2,7 @@
 
 .main-wrap{
     margin-top: 20px;
+    background: #fff;
 
     .title{
         font-size: 20px;
@@ -10,7 +11,7 @@
     }
 
     .basketball-table-medium{
-        width: 900px;
+        width: 1000px;
     }
 
     .basketball-table-big{
@@ -23,10 +24,15 @@
         padding: 30px;
         margin: 0 auto;
 
+        .playoff-line{
+            border-top: 2px solid #666;
+        }
+
         .date-container{
             font-size: 16px;
             font-weight: bold;
         }
+
 
         .table-item-container{
             display: flex;
@@ -96,6 +102,29 @@
         }
     }
 
+    .glossary{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        font-size: 12px;
+
+        .title{
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .item{
+            .lite{
+                color: #000;
+                font-weight: bold;
+            }
+
+            span{
+                color: #666;
+            }
+        }
+    }
 }
 
 

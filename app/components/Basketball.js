@@ -59,8 +59,64 @@ class Basketball extends Component{
                     ):
                     (pageIndex === 1? (
                         <div className="main-wrap">
-                            <div className="title">Ranking</div>
+                            <div className="title">NBA Standings</div>
                             <Table data={eastRanking} type={2} />
+                            <Table data={westRanking} type={2} />
+                            <div className="glossary">
+                                <div className="title">GLOSSARY</div>
+                                <div className="item">
+                                    <span className="lite">W:</span>
+                                    <span>Wins</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">L:</span>
+                                    <span>Losses</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">PCT:</span>
+                                    <span>Winning Percentage</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">GB:</span>
+                                    <span>Games Back</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">HOME:</span>
+                                    <span>Home Record</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">ROAD:</span>
+                                    <span>Road Record</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">PPG:</span>
+                                    <span>Points Per Game</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">OPP PPG:</span>
+                                    <span>Opponent Points Per Game</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">L10:</span>
+                                    <span>Record last 10 games</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">STRK:</span>
+                                    <span>Current Streak</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">X:</span>
+                                    <span>Clinched Playoff berth</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">Y:</span>
+                                    <span>Clinched Dicision</span>
+                                </div>
+                                <div className="item">
+                                    <span className="lite">E:</span>
+                                    <span>Eliminated From Playoff</span>
+                                </div>
+                            </div>
                         </div>
                     ):
                     (

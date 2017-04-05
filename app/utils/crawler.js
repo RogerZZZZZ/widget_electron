@@ -62,6 +62,10 @@ class BasketballCrawler {
 						singleTeam.ppg = tmpTd.text();
 					}else if(tdItem === 10){
 						singleTeam.oppg = tmpTd.text();
+					}else if(tdItem === 12){
+						singleTeam.strk = tmpTd.text();
+					}else if(tdItem === 13){
+						singleTeam.lten = tmpTd.text();
 					}
 				})
 				if(item === 0){
