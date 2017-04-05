@@ -81,7 +81,6 @@ class MainWindow extends Component {
 						</MainPaneContainer>
 					</PaneGroup>
 				</Content>
-				<Footer/>
 			</Window>
 		)
 	}

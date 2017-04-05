@@ -29,6 +29,7 @@
     "electron-app"
   ],
   "dependencies": {
+    "body-parser": "^1.17.1",
     "boron": "^0.2.3",
     "classnames": "^2.2.5",
     "electron-debug": "^0.2.1",
