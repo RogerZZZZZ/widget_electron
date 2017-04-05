@@ -22,7 +22,7 @@ class Basketball extends Component{
             gameResult: [],
             teamRanking: [],
             playerStatistics: [],
-            pageIndex: 2 //0:Schedule, 1:Ranking, 2: Player Statistics
+            pageIndex: 0 //0:Schedule, 1:Ranking, 2: Player Statistics
         }
     }
 
@@ -136,6 +136,8 @@ class Basketball extends Component{
                                 <Table data={pts} type={3} header="POINTS"/>
                                 <Table data={blk} type={3} header="BLOCKS"/>
                                 <Table data={ass} type={3} header="ASSISTS"/>
+                            </div>
+                            <div className="statistics-container">
                                 <Table data={reb} type={3} header="REBOUNDS"/>
                                 <Table data={stl} type={3} header="STEALS"/>
                                 <Table data={fg} type={3} header="FIELD GOAL %"/>
