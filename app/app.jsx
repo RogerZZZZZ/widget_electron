@@ -42,7 +42,7 @@ class MainWindow extends Component {
 			}
 		})
 		this.state = {
-			mainContent: 'Currency',
+			mainContent: 'Todolist',
 			settingItem: settingItem
 		}
 	}

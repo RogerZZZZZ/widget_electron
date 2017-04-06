@@ -60,7 +60,7 @@ class TodolistItem extends Component{
                 <div className="text-container">{data.title}</div>
                 {
                     status === 'done' ? null : (
-                        <div className="date-left">{utils.timeCalculator(moment(self.state.data.start), moment(self.state.data.end), 'day')} days left</div>
+                        <div className="date-left">{utils.timeCalculator(moment(), moment(self.state.data.end), 'day')} days left</div>
                     )
                 }
             </div>

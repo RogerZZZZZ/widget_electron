@@ -48,7 +48,9 @@ class Utils{
 
     timeCalculator(startTime, endTime, type){
         if(type === 'day'){
-            return endTime.diff(startTime, 'days')
+            let dif = endTime.diff(startTime, 'days', true);
+            dif = dif > 0 ? Math.ceil(dif): 0
+            return dif;
         }
     }
 

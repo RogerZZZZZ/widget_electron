@@ -45,6 +45,7 @@ class Todolist extends Component{
 
     _handleEndTime(date){
         if(utils.judgeValidTime(this.state.startTime, date)){
+            console.log(date);
             this.setState({
                 endTime: date
             })
@@ -67,12 +68,6 @@ class Todolist extends Component{
         this.setState({
             isOpen: true
         })
-    }
-
-    _inputBlur(){
-        // this.setState({
-        //     isOpen: false
-        // })
     }
 
     _submitItem(event){
@@ -111,7 +106,7 @@ class Todolist extends Component{
         return (
             <div className="todolist-pane">
                 <div className="new-todo-item-container">
-                    <Input placeholder="What needs to be done?" styleClass="todolist-input" onFocus={this._inputFocus.bind(this)} onBlur={this._inputBlur.bind(this)} onKeyUp={this._submitItem.bind(this)}/>
+                    <Input placeholder="What needs to be done?" styleClass="todolist-input" onFocus={this._inputFocus.bind(this)} onKeyUp={this._submitItem.bind(this)}/>
                     {
                         !this.state.isOpen? null: (
                             <div className="new-date-picker-container">
