@@ -26,7 +26,7 @@ class Basketball extends Component{
         }
     }
 
-    __naviButtonClick(val){
+    _naviButtonClick(val){
         this.setState({
             pageIndex: val
         })
@@ -55,9 +55,9 @@ class Basketball extends Component{
         return (
             <div>
                 <ButtonGroup>
-                    <Button name="Schedule" onClick={self.__naviButtonClick.bind(self, 0)} status={pageIndex===0?false: true}/>
-                    <Button name="Ranking" onClick={self.__naviButtonClick.bind(self, 1)} status={pageIndex===1?false: true}/>
-                    <Button name="Statistics" onClick={self.__naviButtonClick.bind(self, 2)} status={pageIndex===2?false: true}/>
+                    <Button name="Schedule" onClick={self._naviButtonClick.bind(self, 0)} status={pageIndex===0?false: true}/>
+                    <Button name="Ranking" onClick={self._naviButtonClick.bind(self, 1)} status={pageIndex===1?false: true}/>
+                    <Button name="Statistics" onClick={self._naviButtonClick.bind(self, 2)} status={pageIndex===2?false: true}/>
                 </ButtonGroup>
                 {
                     pageIndex === 0? (

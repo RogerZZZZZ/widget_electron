@@ -40,9 +40,32 @@ var constants = {
             state: false,
             id: 'Currency',
             name: 'Currency',
-            icon: 'global'
+            icon: 'globe'
         }
-    }
+    },
+
+    defaultCurrency: [
+        'RMB, China',
+        'AUD, Australia',
+        'CAD, Canada',
+        'CHF, Swizerland',
+        'DKK, Denmark',
+        'EUR, Europe',
+        'GBP, England',
+        'HKD, Hong Kong',
+        'JPY, Japen',
+        'KRW, Korea',
+        'MOP, Macau',
+        'MYR, Malaysia',
+        'NOK, Norway',
+        'NZD, New Zealand',
+        'PHP, Philippines',
+        'RUB, Russia',
+        'SEK, Sweden',
+        'SGD, Singapore',
+        'THB, Thailand',
+        'USD, USA'
+    ]
 }
 
 

@@ -11,19 +11,19 @@ class Button extends Component{
         }
     }
 
-    __hoverInListener(){
+    _hoverInListener(){
         this.setState({
             picName : "../assets/" + this.state.originName + "-on.png"
         })
     }
 
-    __hoverOutListener(){
+    _hoverOutListener(){
         this.setState({
             picName: "../assets/" + this.state.originName + ".png"
         })
     }
 
-    __buttonClick(){
+    _buttonClick(){
         let picName;
         if(this.props.status){
             picName = this.props.name
@@ -39,7 +39,7 @@ class Button extends Component{
 
     render(){
         return (
-            <div className={this.props.align == "left"? "left-button circle-button": "right-button circle-button"} onMouseOver={this.props.static?null:this.__hoverInListener.bind(this)} onClick={this.__buttonClick.bind(this)} onMouseLeave={this.props.static?null:this.__hoverOutListener.bind(this)}>
+            <div className={this.props.align == "left"? "left-button circle-button": "right-button circle-button"} onMouseOver={this.props.static?null:this._hoverInListener.bind(this)} onClick={this._buttonClick.bind(this)} onMouseLeave={this.props.static?null:this._hoverOutListener.bind(this)}>
                 <img src={this.state.picName} className="circle-button-img" ref="buttonImg"/>
             </div>
         )

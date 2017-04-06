@@ -5,11 +5,11 @@ import { EVENT } from './backend/constants';
 
 class Header extends React.Component {
     
-    __openSettingWindow(){
+    _openSettingWindow(){
         event.emit(EVENT.OPEN_SETTINGS_WINDOW);
     }
 
-    __closeWindow() {
+    _closeWindow() {
         event.emit(EVENT.CLOSE_WINDOW);
     }
 
@@ -22,12 +22,12 @@ class Header extends React.Component {
                         {(function(){
                             if(!self.props.existSettingButton){
                                 return (
-                                    <Button glyph="reply" onClick={self.__closeWindow}/>
+                                    <Button glyph="reply" onClick={self._closeWindow}/>
                                 )
                             }else{
                                 return(
                                     <div>
-            						<Button glyph="cog" onClick={self.__openSettingWindow}/>
+            						<Button glyph="cog" onClick={self._openSettingWindow}/>
                                     </div>
                                 )
                             }

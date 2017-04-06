@@ -1,0 +1,77 @@
+.currency-window{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+
+    .currency-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .transfer-input{
+            outline: none;
+            color: #666;
+            width: 60px;
+            font-size: 16px;
+            border: 0px;
+            border-bottom: 1px solid #666;
+            padding-left: 6px;
+            margin: 0 20px 0 10px;
+        }
+
+        .button-wrap{
+            margin-right: 10px;
+            .button-img{
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        .submit-button{
+            padding: 4px 6px;
+            border: 1px solid #666;
+            color: #666;
+            border-radius: 4px
+        }
+
+        .combobox-container{
+            min-width: 120px;
+            height: 30px;
+            border: 1px solid #666;
+            border-radius: 6px;
+            line-height: 30px;
+            font-weight: normal;
+            max-width: 200px;
+            position: relative;
+            display: inline-block;
+            margin: 0 10px 0 10px;
+
+            .show-container{
+                margin-left: 4px;
+                font-weight: bold;
+                padding-right: 10px;
+            }
+
+            .select-container{
+                max-height: 200px;
+                overflow-y: auto;
+                border-left: 1px solid #666;
+                border-right: 1px solid #666;
+                border-bottom: 1px solid #666;
+                position: absolute;
+                top: 30px;
+                background: #fff;
+
+                .select-item{
+                    padding-left: 4px;
+                }
+            }
+        }
+    }
+
+    .result-box{
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+}

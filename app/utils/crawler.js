@@ -1,10 +1,46 @@
 import http from 'http'
 import cheerio from 'cheerio'
+import Utils from './utils.js'
+
+let utils = new Utils();
 
 let basketballUrl = {
 	gameResult: 'http://www.espn.com/nba/schedule',
 	teamRanking: 'http://www.espn.com/nba/standings',
 	playerStatistics: 'http://www.espn.com/nba/statistics'
+}
+
+let currencyUrl = 'http://www.currencydo.com/'
+
+class CurrencyCrawler{
+	init(callback){
+		let self = this;
+		let html = '';
+	    http.get(currencyUrl, function(res) {
+	        res.on('data', function(data) {
+	            html += data;
+	        });
+
+	        res.on('end', function() {
+				callback(self.currencyCallback(html));
+	        })
+	    })
+	}
+
+	currencyCallback(html){
+		let $ = cheerio.load(html);
+		let wrap = $(".table tr");
+		let currency = [];
+		currency.push(1)
+		wrap.each((item) => {
+			if(item === 2 || (item >= 4 && item <= 9) || (item >= 12 && item <= 19) || (item >= 21 && item <= 23) || item === 26){
+				let tmpTd = $(wrap[item]).find('td')[1];
+				let tmpC = parseFloat($(tmpTd).text())/100;
+				currency.push(utils.floatFormat(tmpC, 3))
+			}
+		})
+		return currency;
+	}
 }
 
 class BasketballCrawler {
@@ -223,5 +259,6 @@ class BasketballCrawler {
 }
 
 module.exports = {
-	BasketballCrawler: BasketballCrawler
+	BasketballCrawler: BasketballCrawler,
+	CurrencyCrawler: CurrencyCrawler
 }

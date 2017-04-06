@@ -43,7 +43,7 @@ class Todolist extends Component{
         this.setState({todolist: val})
     }
 
-    __handleEndTime(date){
+    _handleEndTime(date){
         if(utils.judgeValidTime(this.state.startTime, date)){
             this.setState({
                 endTime: date
@@ -53,7 +53,7 @@ class Todolist extends Component{
         }
     }
 
-    __handleStartTime(date){
+    _handleStartTime(date){
         if(utils.judgeValidTime(date, this.state.endTime)){
             this.setState({
                 startTime: date
@@ -63,22 +63,22 @@ class Todolist extends Component{
         }
     }
 
-    __inputFocus(){
+    _inputFocus(){
         this.setState({
             isOpen: true
         })
     }
 
-    __inputBlur(){
+    _inputBlur(){
         // this.setState({
         //     isOpen: false
         // })
     }
 
-    __submitItem(event){
+    _submitItem(event){
         if(event.keyCode == "13"){
             event.target.blur();
-            this.__saveItem(event.target.value);
+            this._saveItem(event.target.value);
             event.target.value = "";
         }else if(event.keyCode == "27"){
             this.setState({
@@ -87,7 +87,7 @@ class Todolist extends Component{
         }
     }
 
-    __saveItem(title){
+    _saveItem(title){
         let self = this;
         let todolist = this.state.todolist;
         if(title !== '' && title !== undefined){
@@ -111,17 +111,17 @@ class Todolist extends Component{
         return (
             <div className="todolist-pane">
                 <div className="new-todo-item-container">
-                    <Input placeholder="What needs to be done?" styleClass="todolist-input" onFocus={this.__inputFocus.bind(this)} onBlur={this.__inputBlur.bind(this)} onKeyUp={this.__submitItem.bind(this)}/>
+                    <Input placeholder="What needs to be done?" styleClass="todolist-input" onFocus={this._inputFocus.bind(this)} onBlur={this._inputBlur.bind(this)} onKeyUp={this._submitItem.bind(this)}/>
                     {
                         !this.state.isOpen? null: (
                             <div className="new-date-picker-container">
                                 <div className="date-picker-item">
                                     <div className="date-picker-desc">Start Time</div>
-                                    <DatePicker customInput={<DatePickerComponent type="big" />} minDate={moment()}      selected={self.state.startTime} onChange={this.__handleStartTime.bind(self)} />
+                                    <DatePicker customInput={<DatePickerComponent type="big" />} minDate={moment()}      selected={self.state.startTime} onChange={this._handleStartTime.bind(self)} />
                                 </div>
                                 <div className="date-picker-item">
                                     <div className="date-picker-desc">End Time</div>
-                                    <DatePicker customInput={<DatePickerComponent type="big" />} minDate={moment()}        selected={self.state.endTime} onChange={this.__handleEndTime.bind(self)} />
+                                    <DatePicker customInput={<DatePickerComponent type="big" />} minDate={moment()}        selected={self.state.endTime} onChange={this._handleEndTime.bind(self)} />
                                 </div>
                                 <div className="date-picker-item">
                                     <div className="date-picker-desc">Expert Duration</div>

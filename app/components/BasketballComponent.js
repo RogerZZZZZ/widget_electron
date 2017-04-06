@@ -204,7 +204,8 @@ class TableCell extends Component{
                             <span>{self.props.index}</span>
                         </div>
                         <div className="cell-item big-cell ">
-                            <span>{itemData.name}</span>
+                            <span className="name">{itemData.name}, </span>
+                            <span>{itemData.team}</span>
                         </div>
                         <div className="cell-item small-cell ">
                             <span>{itemData.value}</span>
@@ -216,21 +217,6 @@ class TableCell extends Component{
         )
     }
 }
-
-// class SmallTable extends Component{
-//     constructor(props){
-//         super(props)
-//
-//     }
-//
-//
-//     render(){
-//
-//     }
-// }
-//
-// class
-
 
 class ButtonGroup extends Component{
     constructor(props){

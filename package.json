@@ -39,10 +39,10 @@
     "object-assign": "^4.0.1",
     "react": "^0.14.8",
     "react-bootstrap": "^0.30.8",
+    "react-bootstrap-autosuggest": "^0.4.1",
     "react-datepicker": "^0.44.0",
     "react-dom": "^0.14.8",
-    "react-photonkit": "^0.3.2",
-    "superagent": "^3.5.2"
+    "react-photonkit": "^0.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",

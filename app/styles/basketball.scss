@@ -19,7 +19,7 @@
     }
 
     .basketball-table-small{
-        width: 300px;
+        width: 400px;
     }
 
     .statistics-container{
@@ -60,6 +60,10 @@
                     font-weight: normal;
                 }
 
+                .name{
+                    color: #06c;
+                }
+
                 .cell{
                     display: flex;
                     flex-direction: row;
@@ -74,11 +78,6 @@
                     .status{
                         margin-right: 6px;
                     }
-
-                    .name{
-                        color: #06c;
-                    }
-
 
                     .team-logo{
                         width: 20px;

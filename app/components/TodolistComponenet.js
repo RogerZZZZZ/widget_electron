@@ -36,24 +36,24 @@ class TodolistItem extends Component{
 
     }
 
-    __changeInputStatus(){
+    _changeInputStatus(){
         this.setState({
             editStatus: !this.state.editStatus
         });
     }
 
-    __inputSubmit(event){
+    _inputSubmit(event){
         if(event.keyCode == "13"){
             this.state.data.title = event.target.value;
             this.setState({data: this.state.data})
-            this.__saveTitle()
+            this._saveTitle()
             event.target.blur();
         }else if(event.keyCode == '27'){
-            this.__changeInputStatus();
+            this._changeInputStatus();
         }
     }
 
-    __renderTitle(data, status){
+    _renderTitle(data, status){
         let self = this;
         return(
             <div className={"content-container " + (status === 'done' ? 'content-container--complete': '')}>
@@ -67,7 +67,7 @@ class TodolistItem extends Component{
         )
     }
 
-    __saveTitle(type){
+    _saveTitle(type){
         let self = this;
         Storage.get('todolist', function(err, data) {
             if(err) throw err;
@@ -76,19 +76,19 @@ class TodolistItem extends Component{
             Storage.set('todolist', newData, ()=> {})
         })
         if(type !== false){
-            this.__changeInputStatus();
+            this._changeInputStatus();
         }
     }
 
 
-    __renderTitleInput(data){
+    _renderTitleInput(data){
         return(
-            <input  autoComplete="off" autoFocus defaultValue={data.title} maxLength="64" ref="inputBox" className="inputBox" onKeyUp={this.__inputSubmit.bind(this)}  type="text"/>
+            <input  autoComplete="off" autoFocus defaultValue={data.title} maxLength="64" ref="inputBox" className="inputBox" onKeyUp={this._inputSubmit.bind(this)}  type="text"/>
         )
     }
 
 
-    __handleStartTime(date) {
+    _handleStartTime(date) {
         if(utils.judgeValidTime(moment(date), moment(this.state.data.end))){
             this.state.data.start = date;
             this.setState({
@@ -98,10 +98,10 @@ class TodolistItem extends Component{
             alert("Invalid time period! please input again!")
         }
 
-    	this.__toggleCalendar()
+    	this._toggleCalendar()
     }
 
-    __handleEndTime(date){
+    _handleEndTime(date){
         if(utils.judgeValidTime(moment(this.state.data.start), moment(date))){
             this.state.data.end = date;
             this.setState({
@@ -110,26 +110,26 @@ class TodolistItem extends Component{
         }else{
             alert("Invalid time period! please input again!")
         }
-    	this.__toggleCalendar()
+    	this._toggleCalendar()
     }
 
-    __toggleCalendar(e) {
+    _toggleCalendar(e) {
     	e && e.preventDefault()
     	this.setState({
     		isOpen: !this.state.isOpen
     	})
     }
 
-    __checkButtonClick(){
+    _checkButtonClick(){
         this.state.data.status = (this.state.data.status === 'done' ? 'wait': 'done')
 
-        this.__saveTitle(false);
+        this._saveTitle(false);
         this.setState({
             data: this.state.data
         })
     }
 
-    __deleteButtonClick(itemId){
+    _deleteButtonClick(itemId){
         let self = this;
         Storage.get('todolist', function(err, data) {
             if(err) throw err;
@@ -154,19 +154,19 @@ class TodolistItem extends Component{
                             <div className="todolist-item-main">
                                 {
                                     !self.state.editStatus ? ( data.status === 'done' ? (
-                                        <Button name="check" static={true} buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left" status={true}/>
+                                        <Button name="check" static={true} buttonClick={self._checkButtonClick.bind(self)} className="left-button" align="left" status={true}/>
                                     )
                                     :(
-                                        <Button name="check" buttonClick={self.__checkButtonClick.bind(self)} className="left-button" align="left" status={false}/>
+                                        <Button name="check" buttonClick={self._checkButtonClick.bind(self)} className="left-button" align="left" status={false}/>
                                     )):null
                                 }
-                                {self.state.editStatus ? this.__renderTitleInput(data) : this.__renderTitle(data, data.status)}
+                                {self.state.editStatus ? this._renderTitleInput(data) : this._renderTitle(data, data.status)}
                                 {
                                     self.state.editStatus || data.status === 'done' ? null: (
-                                        <Button name="edit" buttonClick={self.__changeInputStatus.bind(this)} align="right" />
+                                        <Button name="edit" buttonClick={self._changeInputStatus.bind(this)} align="right" />
                                     )
                                 }
-                                <Button name="trash" buttonClick={self.__deleteButtonClick.bind(self, data.id)} align="right"/>
+                                <Button name="trash" buttonClick={self._deleteButtonClick.bind(self, data.id)} align="right"/>
                             </div>
                             {
                                 !self.state.editStatus ? null: (
@@ -174,13 +174,13 @@ class TodolistItem extends Component{
                                         <div className="todolist-data-select-pane">
                                             <div className="select-pane-content">Start Time:</div>
                                             <div className="select-pane-date">
-                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.start)} onChange={this.__handleStartTime.bind(self)} />
+                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.start)} onChange={this._handleStartTime.bind(self)} />
                                             </div>
                                         </div>
                                         <div className="todolist-data-select-pane">
                                             <div className="select-pane-content">End Time:</div>
                                             <div className="select-pane-date">
-                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.end)} onChange={this.__handleEndTime.bind(self)} />
+                                                <DatePicker customInput={<DatePickerComponent />} selected={moment(data.end)} onChange={this._handleEndTime.bind(self)} />
                                             </div>
                                         </div>
                                         <div className="todolist-data-select-pane">

@@ -7,6 +7,7 @@ import MainPaneContainer from './components/MainPaneContainer.js'
 import Calendar from './components/Calendar.js'
 import Todolist from './components/Todolist.js'
 import Basketball from './components/Basketball.js'
+import Currency from './components/Currency.js'
 import constants from './constants.js'
 import Utils from './utils/utils.js'
 
@@ -41,7 +42,7 @@ class MainWindow extends Component {
 			}
 		})
 		this.state = {
-			mainContent: 'Basketball',
+			mainContent: 'Currency',
 			settingItem: settingItem
 		}
 	}
@@ -51,7 +52,6 @@ class MainWindow extends Component {
 	}
 
 	onHandlerMessage(val) {
-		console.log(val);
 		if (val !== this.state.mainContent) {
 			this.setState({mainContent: val})
 		}
@@ -76,7 +76,9 @@ class MainWindow extends Component {
 									return (<Todolist/>)
 								} else if(mainContentStatus === 'Basketball'){
                                     return (<Basketball />)
-                                }
+                                } else if(mainContentStatus === 'Currency'){
+									return (<Currency />)
+								}
 							})()}
 						</MainPaneContainer>
 					</PaneGroup>

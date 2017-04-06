@@ -97,7 +97,7 @@ var darwinMenu = [{
   submenu: [{
     label: 'About ' + app.getName(),
     click: function(item, focusedWindow) {
-      var file = path.resolve(__dirname, 'assets/epp.png');
+      var file = path.resolve(_dirname, 'assets/epp.png');
       var appIcon = NativeImage.createFromPath(file);
       dialog.showMessageBox(focusedWindow, {
         'type': 'info',

@@ -90,9 +90,9 @@ class Utils{
         return res;
     }
 
-    // timeLeft(startTime, endTime){
-    //     return endTime.from(startTime);
-    // }
+    floatFormat(nums, pos){
+        return Math.round(nums * Math.pow(10, pos))/Math.pow(10, pos);
+    }
 }
 
 export default Utils;

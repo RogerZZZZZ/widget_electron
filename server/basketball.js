@@ -12,7 +12,7 @@ function gameResult(req, res, next){
 
         res.on('end', function() {
             var $ = cheerio.load(html)
-            var items = $('.schedule-content').find('.schedule-game').find('.schedule-game__content')
+            var items = $('.schedule-content').find('.schedule-game').find('.schedule-game_content')
             items.each(function(index, item){
                 console.log(item);
             })

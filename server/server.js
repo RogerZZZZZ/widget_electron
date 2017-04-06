@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use('/', express.static(__dirname + '/www'));
+app.use('/', express.static(_dirname + '/www'));
 
 
 app.get('/gameresult', basketball.gameResult);
