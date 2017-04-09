@@ -16,7 +16,7 @@
   "electronVersion": "0.34.1",
   "scripts": {
     "test": "xo",
-    "start": "node starter.js --2nd",
+    "start": "node starter.js",
     "start-1st": "node starter.js",
     "build": "npm run build-osx && npm run build-win",
     "build-osx": "NODE_ENV=production webpack -p --config webpack.config.js && electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion --icon=assets/epp.icns",
@@ -31,7 +31,9 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "boron": "^0.2.3",
+    "cheerio": "^0.22.0",
     "classnames": "^2.2.5",
+    "create-react-class": "^15.5.1",
     "electron-debug": "^0.2.1",
     "express": "^4.15.2",
     "history": "^1.12.3",
