@@ -12,7 +12,6 @@ class Currency extends Component{
     constructor(props){
         super(props);
         cCrawler.init((data) => {
-            console.log(data);
             this.setState({
                 currencyData: data
             })

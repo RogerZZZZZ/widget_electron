@@ -45,7 +45,6 @@ class Todolist extends Component{
 
     _handleEndTime(date){
         if(utils.judgeValidTime(this.state.startTime, date)){
-            console.log(date);
             this.setState({
                 endTime: date
             })
