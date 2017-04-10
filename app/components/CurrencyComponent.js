@@ -1,6 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
-
+let assetsPrefix = process.env.DEV? '..': '.'
 
 class ComboBox extends Component{
     constructor(props){
@@ -58,7 +58,7 @@ class Button extends Component{
     constructor(props){
         super(props)
         this.state = {
-            picName: '../assets/'+ this.props.picSrc + '.png'
+            picName: assetsPrefix + '/assets/'+ this.props.picSrc + '.png'
         }
     }
 

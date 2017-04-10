@@ -1,25 +1,27 @@
 import React from 'react'
 import { Component } from 'react'
 
+let assetsPrefix = process.env.DEV? '..': '.'
+
 class Button extends Component{
     constructor(props){
         super(props);
         let picName = (this.props.status === false || this.props.status === undefined? this.props.name: this.props.name+"-done");
         this.state = {
-            picName: "../assets/" + picName+ ".png",
+            picName: assetsPrefix + "/assets/" + picName+ ".png",
             originName: this.props.name
         }
     }
 
     _hoverInListener(){
         this.setState({
-            picName : "../assets/" + this.state.originName + "-on.png"
+            picName : assetsPrefix + "/assets/" + this.state.originName + "-on.png"
         })
     }
 
     _hoverOutListener(){
         this.setState({
-            picName: "../assets/" + this.state.originName + ".png"
+            picName: assetsPrefix + "/assets/" + this.state.originName + ".png"
         })
     }
 
@@ -31,7 +33,7 @@ class Button extends Component{
             picName = this.props.name + '-done';
         }
         this.setState({
-            picName: "../assets/" + picName + ".png"
+            picName: assetsPrefix + "/assets/" + picName + ".png"
         })
         this.props.buttonClick();
     }

@@ -9,8 +9,15 @@
 .main-pane-container{
     position: relative;
     width: 100%;
-    height: 100%;
+}
+
+.main-pane-brown{
+    background:#222;
+}
+
+.main-pane-white{
     background: #fff;
+    height: 100%;
 }
 
 .circle-button{

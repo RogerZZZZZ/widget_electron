@@ -59,6 +59,8 @@ class MainWindow extends Component {
 
 	render() {
 		let self = this;
+		let mainContentStatus = self.state.mainContent;
+		let isBGCBlack = mainContentStatus === 'Todolist'? true: false;
 		return (
 			<Window>
 				<Header existSettingButton={true} titleName="Widget"/>
@@ -67,9 +69,8 @@ class MainWindow extends Component {
 						<Sidebar onHandlerMessage={this.onHandlerMessage.bind(this)} settingItem={self.state.settingItem
 							? self.state.settingItem
 							: []}/>
-						<MainPaneContainer>
+						<MainPaneContainer bgc={isBGCBlack}>
 							{(function() {
-                                let mainContentStatus = self.state.mainContent;
 								if (mainContentStatus === 'Calendar') {
 									return (<Calendar/>)
 								} else if(mainContentStatus === 'Todolist'){

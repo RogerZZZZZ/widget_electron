@@ -10,7 +10,7 @@ class MainPaneContainer extends Component{
 
     render(){
         return(
-            <div className="main-pane-container">
+            <div className={this.props.bgc ? "main-pane-container main-pane-brown": "main-pane-container main-pane-white"}>
                 {this.props.children}
             </div>
         )
